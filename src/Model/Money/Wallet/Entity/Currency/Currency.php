@@ -78,12 +78,12 @@ class Currency
 
     public function isRUB(): bool
     {
-        return $this->code === self::RUB;
+        return $this->equalCode(self::RUB);
     }
 
     public function isUSD(): bool
     {
-        return $this->code === self::USD;
+        return $this->equalCode(self::USD);
     }
 
     public function equalCode(string $code): bool
