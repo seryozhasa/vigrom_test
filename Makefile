@@ -1,6 +1,8 @@
 up: docker-up
 restart: docker-down docker-up
 init: docker-down-clear docker-pull docker-build docker-up app-init
+test: app-test
+test-docker: app-test-docker
 
 docker-up:
 	docker-compose up -d
@@ -27,3 +29,9 @@ cli:
 
 app-migrations:
 	docker-compose run --rm app-php-cli php bin/console doctrine:migrations:migrate --no-interaction
+
+app-test:
+	php bin/phpunit
+
+app-test-docker:
+	docker-compose run --rm app-php-cli php bin/phpunit
