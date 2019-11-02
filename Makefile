@@ -35,3 +35,6 @@ app-test:
 
 app-test-docker:
 	docker-compose run --rm app-php-cli php bin/phpunit
+
+update-currency:
+	docker-compose run --rm app-php-cli php bin/console currency:quote:update

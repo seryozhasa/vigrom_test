@@ -9,7 +9,9 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="wallet_currencies")
+ * @ORM\Table(name="wallet_currencies", uniqueConstraints={
+ *     @ORM\UniqueConstraint(columns={"code"}),
+ * }))
  * @author sergey seryozhasafonov@gmail.com
  */
 class Currency
@@ -28,6 +30,13 @@ class Currency
      * @ORM\Column(type="string")
      */
     private $code;
+
+    /**
+     * Количество рублей за данную валюту
+     * @var float
+     * @ORM\Column(type="float")
+     */
+    private $value;
 
     private function __construct(string $code)
     {
@@ -50,9 +59,16 @@ class Currency
         return new self(self::USD);
     }
 
-    /**
-     * @return string
-     */
+    public function getValue(): float
+    {
+        return $this->value;
+    }
+
+    public function setValue(float $value): void
+    {
+        $this->value = $value;
+    }
+
     public function getCode(): string
     {
         return $this->code;
