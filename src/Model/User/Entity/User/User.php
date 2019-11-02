@@ -19,6 +19,8 @@ class User
     /**
      * @var int
      * @ORM\Id
+     * @ORM\GeneratedValue
+     * @ORM\Column(type="integer")
      */
     private $id;
 
@@ -30,7 +32,7 @@ class User
 
     /**
      * @var Wallet
-     * @ORM\OneToOne(targetEntity="Wallet")
+     * @ORM\OneToOne(targetEntity="App\Model\Money\Wallet\Entity\Wallet\Wallet")
      */
     private $wallet;
 

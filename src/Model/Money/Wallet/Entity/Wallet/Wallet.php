@@ -17,12 +17,14 @@ class Wallet
     /**
      * @var int
      * @ORM\Id
+     * @ORM\GeneratedValue
+     * @ORM\Column(type="integer")
      */
     private $id;
 
     /**
      * @var Currency
-     * @ORM\OneToOne(targetEntity="Currency")
+     * @ORM\OneToOne(targetEntity="App\Model\Money\Wallet\Entity\Currency\Currency")
      */
     private $currency;
 
