@@ -51,7 +51,9 @@ class Wallet
     public function changeCurrency(Currency $currency): void
     {
         // TODO: Сделать переконвертацию баланса
-        $this->currency = $currency;
+        if (!$this->currency->equalCode($currency->getCode())) {
+            $this->currency = $currency;
+        }
     }
 
     public function getBalance(): float
@@ -61,9 +63,7 @@ class Wallet
 
     public function minus(Currency $currency, float $amount): void
     {
-        if (!$this->currency->equalCode($currency->getCode())) {
-            $this->changeCurrency($currency);
-        }
+        $this->changeCurrency($currency);
         if ($this->balance - $amount < 0) {
             throw new \DomainException('Balance cannot be negative');
         }
@@ -72,9 +72,7 @@ class Wallet
 
     public function plus(Currency $currency, float $amount): void
     {
-        if (!$this->currency->equalCode($currency->getCode())) {
-            $this->changeCurrency($currency);
-        }
+        $this->changeCurrency($currency);
         $this->balance += $amount;
     }
 }
