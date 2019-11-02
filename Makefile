@@ -19,7 +19,7 @@ docker-pull:
 docker-build:
 	docker-compose build
 
-app-init: app-composer-install app-migrations
+app-init: app-composer-install app-migrations app-fixtures update-currency
 
 app-composer-install:
 	docker-compose run --rm app-php-cli composer install
@@ -29,6 +29,9 @@ cli:
 
 app-migrations:
 	docker-compose run --rm app-php-cli php bin/console doctrine:migrations:migrate --no-interaction
+
+app-fixtures:
+	docker-compose run --rm app-php-cli php bin/console doctrine:fixtures:load --no-interaction
 
 app-test:
 	php bin/phpunit
