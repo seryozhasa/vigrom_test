@@ -34,13 +34,13 @@ class Wallet
      */
     private $balance;
 
-    private function __construct(Currency $currency, float $balance)
+    private function __construct(Currency $currency, float $balance = 0.0)
     {
         $this->currency = $currency;
         $this->balance = $balance;
     }
 
-    public static function create(Currency $currency, float $balance): self
+    public static function create(Currency $currency, float $balance = 0.0): self
     {
         return new self($currency, $balance);
     }
