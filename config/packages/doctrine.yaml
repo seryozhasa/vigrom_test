@@ -7,6 +7,9 @@ doctrine:
             charset: utf8
             collate: utf8
         url: '%env(resolve:DATABASE_URL)%'
+        types:
+            transaction_type: 'App\Model\Money\Transaction\Entity\Transaction\TypeType'
+            transaction_cause: 'App\Model\Money\Transaction\Entity\Transaction\CauseType'
     orm:
         auto_generate_proxy_classes: true
         naming_strategy: doctrine.orm.naming_strategy.underscore
@@ -23,4 +26,10 @@ doctrine:
                 type: annotation
                 dir: '%kernel.project_dir%/src/Model/Money/Wallet/Entity'
                 prefix: 'App\Model\Money\Wallet\Entity'
+                alias: App
+            Transaction:
+                is_bundle: false
+                type: annotation
+                dir: '%kernel.project_dir%/src/Model/Money/Transaction/Entity'
+                prefix: 'App\Model\Money\Transaction\Entity'
                 alias: App
