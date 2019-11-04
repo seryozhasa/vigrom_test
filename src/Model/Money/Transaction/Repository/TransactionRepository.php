@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\Model\Money\Transaction\Repository;
 
 use App\Model\EntityNotFoundException;
+use Doctrine\DBAL\Configuration;
+use Doctrine\DBAL\DriverManager;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Model\Money\Transaction\Entity\Transaction\Transaction;
 
@@ -33,6 +35,24 @@ class TransactionRepository
             throw new EntityNotFoundException('Transaction is not found.');
         }
         return $transaction;
+    }
+
+    public function getRefundLastWeek()
+    {
+        $connection = DriverManager::getConnection(['url' => $_ENV['DATABASE_URL']], new Configuration());
+        return $connection->query('
+            SELECT 
+                sum(t.amount), 
+                c.code 
+            FROM transactions t 
+                INNER JOIN public.wallet_currencies c 
+                    ON t.currency_id=c.id 
+            WHERE 
+                date BETWEEN NOW() - INTERVAL \'1 week\' AND 
+                NOW() AND 
+                cause=\'refund\' GROUP BY currency_id, c.code
+')->fetchAll();
+
     }
 
     public function add(Transaction $transaction): void
