@@ -17,8 +17,14 @@ class CurrencyBuilder
      */
     private $code;
 
+    /**
+     * @var float
+     */
+    private $value;
+
     public function __construct()
     {
+        $this->value = 1.0;
         $this->code = Currency::RUB;
     }
 
@@ -36,8 +42,17 @@ class CurrencyBuilder
         return $clone;
     }
 
+    public function withValue(float $value): self
+    {
+        $clone = clone $this;
+        $clone->value = $value;
+        return $clone;
+    }
+
     public function build(): Currency
     {
-        return Currency::create($this->code);
+        $currency = Currency::create($this->code);
+        $currency->setValue($this->value);
+        return $currency;
     }
 }

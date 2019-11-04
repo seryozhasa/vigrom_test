@@ -52,8 +52,8 @@ class Wallet
 
     public function changeCurrency(Currency $currency): void
     {
-        // TODO: Сделать переконвертацию баланса
         if (!$this->currency->equalCode($currency->getCode())) {
+            $this->balance = $this->balance / ($currency->getValue() / $this->currency->getValue());
             $this->currency = $currency;
         }
     }
