@@ -31,7 +31,11 @@ class BalanceController extends AbstractController
                 ],
             ]);
         } catch (\Exception $exception) {
-            return $this->json(['error' => $exception->getMessage()], 404);
+            return $this->json([
+                'error' => [
+                    'error_msg' => $exception->getMessage(),
+                ]
+            ], 404);
         }
     }
 }

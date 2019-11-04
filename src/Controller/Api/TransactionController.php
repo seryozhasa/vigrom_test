@@ -35,7 +35,11 @@ class TransactionController extends AbstractController
             $this->handler->handle($command);
             return $this->json(['success']);
         } catch (\Exception $exception) {
-            return $this->json(['error' => $exception->getMessage()], 500);
+            return $this->json([
+                'error' => [
+                    'error_msg' => $exception->getMessage(),
+                ]
+            ], 500);
         }
     }
 
@@ -50,7 +54,11 @@ class TransactionController extends AbstractController
             $this->handler->handle($command);
             return $this->json(['success']);
         } catch (\Exception $exception) {
-            return $this->json(['error' => $exception->getMessage()], 500);
+            return $this->json([
+                'error' => [
+                    'error_msg' => $exception->getMessage(),
+                ]
+            ], 500);
         }
     }
 }
