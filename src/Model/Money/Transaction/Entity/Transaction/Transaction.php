@@ -31,13 +31,13 @@ class Transaction
 
     /**
      * @var Wallet
-     * @ORM\OneToOne(targetEntity="App\Model\Money\Wallet\Entity\Wallet\Wallet")
+     * @ORM\ManyToOne(targetEntity="App\Model\Money\Wallet\Entity\Wallet\Wallet")
      */
     private $wallet;
 
     /**
      * @var Currency
-     * @ORM\OneToOne(targetEntity="App\Model\Money\Wallet\Entity\Currency\Currency")
+     * @ORM\ManyToOne(targetEntity="App\Model\Money\Wallet\Entity\Currency\Currency")
      */
     private $currency;
 
