@@ -19,6 +19,9 @@ class AdditionalTaskController extends AbstractController
      */
     public function query(TransactionRepository $repository)
     {
-        print_r($repository->getRefundLastWeek());exit;
+        echo '<pre>';
+        print_r($repository->getRefundLastWeek());
+        echo '</pre>';
+        exit;
     }
 }
