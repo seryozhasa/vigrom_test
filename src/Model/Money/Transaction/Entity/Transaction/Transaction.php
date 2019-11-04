@@ -62,6 +62,11 @@ class Transaction
     private function __construct(Wallet $wallet, Type $type, Currency $currency, Cause $cause, float $amount, \DateTimeImmutable $date = null)
     {
         $this->wallet = $wallet;
+        if ($type->isDebit()) {
+            $this->wallet->plus($amount, $currency);
+        } elseif ($type->isCredit()) {
+            $this->wallet->minus($amount, $currency);
+        }
         $this->type = $type;
         $this->currency = $currency;
         $this->amount = $amount;

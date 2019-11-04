@@ -20,11 +20,11 @@ class WalletFixture extends Fixture implements DependentFixtureInterface
 
     public function load(ObjectManager $manager)
     {
-        $wallet_rub = Wallet::create($this->getReference(CurrencyFixture::REFERENCE_RUB), 1000.0);
+        $wallet_rub = Wallet::create($this->getReference(CurrencyFixture::REFERENCE_RUB), 10000.0);
         $manager->persist($wallet_rub);
         $this->setReference(self::REFERENCE_RUB, $wallet_rub);
 
-        $wallet_usd = Wallet::create($this->getReference(CurrencyFixture::REFERENCE_USD), 1000.0);
+        $wallet_usd = Wallet::create($this->getReference(CurrencyFixture::REFERENCE_USD), 10000.0);
         $manager->persist($wallet_usd);
         $this->setReference(self::REFERENCE_USD, $wallet_usd);
 

@@ -41,7 +41,8 @@ class TransactionFixture extends Fixture implements DependentFixtureInterface
             $wallet = $wallets[array_rand($wallets)];
             $cause = $causes[array_rand($causes)];
             $currency = $currencies[array_rand($currencies)];
-            $transaction = Transaction::create($wallet, $type, $currency, $cause, (float) rand(10, 5000), $time);
+            $amount = $type->isDebit() ? (float) rand(1000, 3000) : (float) rand(10, 999);
+            $transaction = Transaction::create($wallet, $type, $currency, $cause, $amount, $time);
             $manager->persist($transaction);
         }
         $manager->flush();
