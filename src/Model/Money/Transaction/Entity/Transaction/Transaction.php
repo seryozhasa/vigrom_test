@@ -53,6 +53,12 @@ class Transaction
      */
     private $cause;
 
+    /**
+     * @var \DateTimeImmutable
+     * @ORM\Column(type="datetime_immutable", nullable=true)
+     */
+    private $date;
+
     private function __construct(Wallet $wallet, Type $type, Currency $currency, Cause $cause, float $amount)
     {
         $this->wallet = $wallet;
@@ -60,6 +66,7 @@ class Transaction
         $this->currency = $currency;
         $this->amount = $amount;
         $this->cause = $cause;
+        $this->date = new \DateTimeImmutable();
     }
 
     public static function create(Wallet $wallet, Type $type, Currency $currency, Cause $cause, float $amount): self
