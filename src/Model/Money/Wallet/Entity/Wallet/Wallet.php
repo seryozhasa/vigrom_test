@@ -63,18 +63,22 @@ class Wallet
         return $this->balance;
     }
 
-    public function minus(Currency $currency, float $amount): void
+    public function minus(float $amount, Currency $currency = null): void
     {
-        $this->changeCurrency($currency);
+        if (!is_null($currency)) {
+            $this->changeCurrency($currency);
+        }
         if ($this->balance - $amount < 0) {
             throw new \DomainException('Balance cannot be negative');
         }
         $this->balance -= $amount;
     }
 
-    public function plus(Currency $currency, float $amount): void
+    public function plus(float $amount, Currency $currency = null): void
     {
-        $this->changeCurrency($currency);
+        if (!is_null($currency)) {
+            $this->changeCurrency($currency);
+        }
         $this->balance += $amount;
     }
 }

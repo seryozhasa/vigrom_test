@@ -44,9 +44,9 @@ class Handler
         $cause = new Cause($command->cause);
 
         if ($type->isCredit()) {
-            $wallet->minus($currency, $command->amount);
+            $wallet->minus($command->amount, $currency);
         } elseif ($type->isDebit()) {
-            $wallet->plus($currency, $command->amount);
+            $wallet->plus($command->amount, $currency);
         } else {
             throw new \DomainException('Unknown transaction type');
         }
