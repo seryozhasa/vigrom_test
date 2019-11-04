@@ -1,6 +1,6 @@
 Для деплоя в линуксе при наличии утилиты make просто выполнить "make init"
 
-Инача выполнять:
+Иначе выполнять:
 - docker-compose pull
 - docker-compose build
 - docker-compose up -d
