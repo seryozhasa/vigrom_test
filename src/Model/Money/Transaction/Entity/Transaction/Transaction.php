@@ -59,29 +59,29 @@ class Transaction
      */
     private $date;
 
-    private function __construct(Wallet $wallet, Type $type, Currency $currency, Cause $cause, float $amount)
+    private function __construct(Wallet $wallet, Type $type, Currency $currency, Cause $cause, float $amount, \DateTimeImmutable $date = null)
     {
         $this->wallet = $wallet;
         $this->type = $type;
         $this->currency = $currency;
         $this->amount = $amount;
         $this->cause = $cause;
-        $this->date = new \DateTimeImmutable();
+        $this->date = $date ?? new \DateTimeImmutable();
     }
 
-    public static function create(Wallet $wallet, Type $type, Currency $currency, Cause $cause, float $amount): self
+    public static function create(Wallet $wallet, Type $type, Currency $currency, Cause $cause, float $amount, \DateTimeImmutable $date = null): self
     {
-        return new self($wallet, $type, $currency, $cause, $amount);
+        return new self($wallet, $type, $currency, $cause, $amount, $date);
     }
 
-    public static function createDebit(Wallet $wallet, Currency $currency, Cause $cause, float $amount): self
+    public static function createDebit(Wallet $wallet, Currency $currency, Cause $cause, float $amount, \DateTimeImmutable $date = null): self
     {
-        return new self($wallet, Type::createDebit(), $currency, $cause, $amount);
+        return new self($wallet, Type::createDebit(), $currency, $cause, $amount, $date);
     }
 
-    public static function createCredit(Wallet $wallet, Currency $currency, Cause $cause, float $amount): self
+    public static function createCredit(Wallet $wallet, Currency $currency, Cause $cause, float $amount, \DateTimeImmutable $date = null): self
     {
-        return new self($wallet, Type::createCredit(), $currency, $cause, $amount);
+        return new self($wallet, Type::createCredit(), $currency, $cause, $amount, $date);
     }
 
     public function getWallet(): Wallet
