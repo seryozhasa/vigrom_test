@@ -41,6 +41,9 @@ class Command
 
     public function __construct(int $walletId, string $currency, string $type, float $amount, string $cause)
     {
+        if ($amount <= 0) {
+            throw new \DomainException('Amount cannot be less than or equal to 0');
+        }
         $this->walletId = $walletId;
         $this->currency = $currency;
         $this->type = $type;
